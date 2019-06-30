@@ -83,13 +83,13 @@ class UnitTest:
 
         # print output, if not explicitly disabled
         if not self.noPrint and not self.isTesting:
-            print(' [IN]', f_pstr)
+            print('>>> ', f_pstr)
 
             # handle printing of string types accurately
             if isinstance(f_out, str):
-                print('[OUT]', f"'{f_out}'")
+                print(f"'{f_out}'")
             else:
-                print('[OUT]', f_out)
+                print(f_out)
             self._hr_()
 
         # return output
@@ -115,18 +115,19 @@ class UnitTest:
 
         # print output, if not explicitly disabled
         if not self.noPrint:
-            print(' [IN]', f_pstr)
+            print('>>> ', f_pstr)
 
             # handle printing of string types accurately
             if isinstance(f_out, str):
-                print('[OUT]', f"'{f_out}'")
+                print(f"'{f_out}'")
             else:
-                print('[OUT]', f_out)
+                print(f_out)
 
+            self._hr_(key='-')
             if isinstance(expected_output, str):
-                print('[EXP]', f"'{expected_output}'")
+                print(f"'{expected_output}'", '(EXPECTED)')
             else:
-                print('[EXP]', expected_output)
+                print(expected_output, '(EXPECTED)')
             self._hr_()
 
         # return test result in bool
@@ -158,18 +159,19 @@ class UnitTest:
                 passed_tests += 1
             # if failed, show details to user
             else:
-                print(' [IN]', f_str)
+                print('>>> ', f_str)
 
                 # handle printing of string types accurately
                 if isinstance(f_out, str):
-                    print('[OUT]', f"'{f_out}'")
+                    print(f"'{f_out}'")
                 else:
-                    print('[OUT]', f_out)
+                    print(f_out)
 
+                self._hr_(key='-')
                 if isinstance(expected, str):
-                    print('[EXP]', f"'{expected}'")
+                    print(f"'{expected}'", '(EXPECTED)')
                 else:
-                    print('[EXP]', expected)
+                    print(expected, '(EXPECTED)')
                 self._hr_()
 
         print(f"{passed_tests}/{total_tests} test(s) passed.")
