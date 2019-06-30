@@ -33,29 +33,22 @@ class UnitTest:
     #         return True
     #     return False
 
+    def _arg2str_(self, arg):
+        """Return a string which properly formats variables for clear print output."""
+        if isinstance(arg, str):
+            return f"'{arg}'"
+        else:
+            return str(arg)
+
     def _args2str_(self, args):
         """Return a string containing comma separated items from argument list."""
-        # ensure that 'string' inputs are preserved with apostrophes
-        str_args = []
-        for arg in args:
-            if isinstance(arg, str):
-                str_args.append(f"'{arg}'")
-            else:
-                str_args.append(str(arg))
         # return joined string of input arguments
-        return ', '.join(x for x in str_args)
+        return ', '.join(self._arg2str_(x) for x in args)
 
     def _kwargs2str_(self, kwargs):
         """Return a string containing comma separated items from key argument list."""
-        # ensure that 'string' key val inputs are preserved with apostrophes
-        str_kwargs = []
-        for k, v in kwargs.items():
-            if isinstance(v, str):
-                str_kwargs.append((str(k), f"'{v}'"))
-            else:
-                str_kwargs.append((str(k), str(v)))
         # return joined string of input key arguments
-        return ', '.join(f"{k}={v}" for k, v in str_kwargs)
+        return ', '.join(f"{k}={self._arg2str_(v)}" for k, v in kwargs.items())
 
     def _func2str_(self, args, kwargs):
         """Return a string representation of the function tested."""
@@ -86,10 +79,7 @@ class UnitTest:
             print('>>> ', f_pstr)
 
             # handle printing of string types accurately
-            if isinstance(f_out, str):
-                print(f"'{f_out}'")
-            else:
-                print(f_out)
+            print(self._arg2str_(f_out))
             self._hr_()
 
         # return output
@@ -117,17 +107,12 @@ class UnitTest:
         if not self.noPrint:
             print('>>> ', f_pstr)
 
-            # handle printing of string types accurately
-            if isinstance(f_out, str):
-                print(f"'{f_out}'")
-            else:
-                print(f_out)
+            print(self._arg2str_(f_out))
 
             self._hr_(key='-')
-            if isinstance(expected_output, str):
-                print(f"'{expected_output}'", '(EXPECTED)')
-            else:
-                print(expected_output, '(EXPECTED)')
+
+            print(self._arg2str_(expected_output), '(EXPECTED)')
+
             self._hr_()
 
         # return test result in bool
@@ -161,17 +146,12 @@ class UnitTest:
             else:
                 print('>>> ', f_str)
 
-                # handle printing of string types accurately
-                if isinstance(f_out, str):
-                    print(f"'{f_out}'")
-                else:
-                    print(f_out)
+                print(self._arg2str_(f_out))
 
                 self._hr_(key='-')
-                if isinstance(expected, str):
-                    print(f"'{expected}'", '(EXPECTED)')
-                else:
-                    print(expected, '(EXPECTED)')
+
+                print(self._arg2str_(expected), '(EXPECTED)')
+
                 self._hr_()
 
         print(f"{passed_tests}/{total_tests} test(s) passed.")
