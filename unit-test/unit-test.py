@@ -133,3 +133,44 @@ class UnitTest:
         if f_out == expected_output:
             return True
         return False
+
+    def evaluate(self, tests, testKey=None):
+        """Evaluate a function's performance by running through a series of unit tests.
+
+        These tests are stored in the form of a dictionary, where the key is the function argument input and the linked value is the expected result.
+
+        A specific test can be chosen by inserting the relevant key into 'testKey='.
+
+        If the input argument is a string, it must be encapsulated as expected of a string. E.g. "'text'".
+        """
+        # testing stats
+        total_tests = len(tests.keys())
+        passed_tests = 0
+
+        # testing loop
+        for args, expected in tests.items():
+            # create equivalent function and execute
+            f_str = f"{self.func}({args})"
+            f_out = eval(f_str)
+
+            # compare results
+            if f_out == expected:
+                passed_tests += 1
+            # if failed, show details to user
+            else:
+                print(' [IN]', f_str)
+
+                # handle printing of string types accurately
+                if isinstance(f_out, str):
+                    print('[OUT]', f"'{f_out}'")
+                else:
+                    print('[OUT]', f_out)
+
+                if isinstance(expected, str):
+                    print('[EXP]', f"'{expected}'")
+                else:
+                    print('[EXP]', expected)
+                self._hr_()
+
+        print(f"{passed_tests}/{total_tests} test(s) passed.")
+        self._hr_()
