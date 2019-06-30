@@ -105,15 +105,19 @@ class UnitTest:
 
         # print output, if not explicitly disabled
         if not self.noPrint:
-            print('>>> ', f_pstr)
+            if f_out == expected_output:
+                print('>>>', f_pstr, '[PASSED]')
 
-            print(self._arg2str_(f_out))
+            else:
+                print('>>>', f_pstr, '[FAILED]')
 
-            self._hr_(key='-')
+                print(self._arg2str_(f_out))
 
-            print(self._arg2str_(expected_output), '(EXPECTED)')
+                self._hr_(key='-')
 
-            self._hr_()
+                print(self._arg2str_(expected_output), '(EXPECTED)')
+
+                self._hr_()
 
         # return test result in bool
         if f_out == expected_output:
@@ -141,18 +145,16 @@ class UnitTest:
 
             # compare results
             if f_out == expected:
+                print('>>>', f_str, '[PASSED]')
                 passed_tests += 1
             # if failed, show details to user
             else:
-                print('>>> ', f_str)
+                print('>>>', f_str, '[FAILED]')
 
-                print(self._arg2str_(f_out))
+                print('  [OUTPUT]', self._arg2str_(f_out))
+                print('[EXPECTED]', self._arg2str_(expected))
 
                 self._hr_(key='-')
-
-                print(self._arg2str_(expected), '(EXPECTED)')
-
-                self._hr_()
 
         print(f"{passed_tests}/{total_tests} test(s) passed.")
         self._hr_()
