@@ -176,3 +176,26 @@ class UnitTest:
 
         print(f"{passed_tests}/{total_tests} test(s) passed.")
         self._hr_()
+
+
+# testing area
+if __name__ == "__main__":
+    def test_function(a, b=0, c=2):
+        """Test function."""
+        return (a, b, c)
+
+    def test_function2(input):
+        """Test function."""
+        return input
+
+    ut = UnitTest('test_function')
+    ut.run(1, c=3)
+    ut.run(10, 9, 8)
+    ut.run(a=1, c='10')
+    ut.run(a=1, c=['8']*3)
+
+    ut2 = UnitTest('test_function2')
+    ut2.test('text', 'text')
+
+    ut2_tests = {"'text'": 'text', "'apple'": 'apple', 1: 1, 2: 3}
+    ut2.evaluate(ut2_tests)
