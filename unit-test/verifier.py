@@ -2,6 +2,8 @@
 This module implements a test runner for the 'pytest' package.
 
 The goal of this module is to create a program to verbosely and informatively provide feedback for tasks given to students learning python in an easy to use fashion.
+
+Written by Haohan Liu for CodeCamp.
 """
 
 # class imports
