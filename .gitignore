@@ -1,1 +1,7 @@
 launch_jupyter.bat
+
+.pytest_cache/
+*/.pytest_cache/
+
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
